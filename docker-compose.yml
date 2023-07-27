@@ -2,8 +2,8 @@ version: "3.1"
 services:
 
   postgres:
-    container_name: movie_pgsql
     image: postgres:15-alpine3.18
+    container_name: star_pgsql
     restart: unless-stopped
     environment:
       - POSTGRES_USER=${POSTGRES_USER}

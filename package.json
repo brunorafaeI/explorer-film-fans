@@ -5,8 +5,9 @@
   "main": "build/server.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch -r tsconfig-paths/register src/server.ts",
-    "migrate": "npx knex migrate:latest --knexfile ./build/infra/database/knex/index.js",
+    "dev:build": "tsc -w",
+    "dev:server": "tsx watch -r tsconfig-paths/register src/server.ts",
+    "knex:migrate": "tsx -r tsconfig-paths/register ./node_modules/knex/bin/cli.js migrate:latest --knexfile ./src/infra/database/knex/config.ts",
     "ci": "npm run migrate && npm start",
     "start": "npm build && node build/server.js"
   },

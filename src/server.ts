@@ -7,4 +7,3 @@ app.listen({
   host: '0.0.0.0',
   port: APP_PORT
 }, () => console.info(`Server listening on port ${APP_PORT}`))
- 

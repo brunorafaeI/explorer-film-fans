@@ -1,15 +1,17 @@
-import { getenv } from "@common/libs/dotenv"
+import { getenv } from '@common/libs/dotenv'
 import path from "node:path"
 
 interface KnexConfig {
   [key: string]: object;
 }
 
-export const knexConfig: KnexConfig = {
+const NODE_ENV = getenv('NODE_ENV') || 'development'
+
+const knexConfig: KnexConfig = {
   test: {
     client: 'sqlite3',
     connection: {
-      filename: './src/infra/database/test.sqlite3'
+      filename: path.resolve("..","sqlite","test.sqlite3")
     }
   },
 
@@ -18,8 +20,7 @@ export const knexConfig: KnexConfig = {
     connection: getenv('POSTGRES_DB_URL')!,
     pool: { max: 15 },
     migrations: {
-      tableName: 'knex_migrations',
-      directory: path.resolve("..","..","infra","database","knex","migrations"),
+      directory: path.resolve(__dirname,"migrations"),
     },
     debug: true,
     useNullAsDefault: true
@@ -30,9 +31,10 @@ export const knexConfig: KnexConfig = {
     connection: getenv('POSTGRES_DB_URL')!,
     pool: { max: 15 },
     migrations: {
-      tableName: 'knex_migrations',
-      directory: path.resolve("..","..","infra","database","knex","migrations"),
+      directory: path.resolve(__dirname,"migrations"),
     },
     ssl: true
   }
-};
+}
+
+export default knexConfig[NODE_ENV]
