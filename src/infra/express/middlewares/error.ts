@@ -1,22 +1,28 @@
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
- export class AppError extends Error {
+export class AppError extends Error {
 
-  constructor (
+  constructor(
     public readonly message: string,
     public readonly statusCode: number = 400
   ) {
     super()
   }
-}
 
-export const GlobalError = (
-  err: any,
-  req: Request,
-  res: Response,
-  _: NextFunction
-) => {
-  const { message, statusCode } = err
+  static handler(
+    err: any,
+    req: Request,
+    res: Response,
+    _: NextFunction
+  ) {
+    const { message, statusCode } = err
 
-  return res.status(statusCode || 500).json({ message })
+    if (statusCode) {
+      return res.status(statusCode).json({ message})
+    }
+
+    return res.status(500).json({
+      message: "Internal server error."
+    })
+  }
 }

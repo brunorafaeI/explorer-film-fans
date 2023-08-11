@@ -1,5 +1,5 @@
-import { getenv } from '@common/libs/dotenv';
-import app from '@infra/express/app';
+import { getenv } from '@common/libs/dotenv'
+import app from '@infra/express/app'
 
 const APP_PORT = getenv('APP_PORT', 8080)
 

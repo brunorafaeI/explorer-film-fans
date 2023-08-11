@@ -11,7 +11,7 @@ const knexConfig: KnexConfig = {
   test: {
     client: 'sqlite3',
     connection: {
-      filename: path.resolve("..","sqlite","test.sqlite3")
+      filename: path.resolve("..", "sqlite", "test.sqlite3")
     }
   },
 
@@ -20,7 +20,7 @@ const knexConfig: KnexConfig = {
     connection: getenv('POSTGRES_DB_URL')!,
     pool: { max: 15 },
     migrations: {
-      directory: path.resolve(__dirname,"migrations"),
+      directory: path.resolve(__dirname, "migrations"),
     },
     debug: true,
     useNullAsDefault: true
@@ -31,7 +31,7 @@ const knexConfig: KnexConfig = {
     connection: getenv('POSTGRES_DB_URL')!,
     pool: { max: 15 },
     migrations: {
-      directory: path.resolve(__dirname,"migrations"),
+      directory: path.resolve(__dirname, "migrations"),
     },
     ssl: true
   }
